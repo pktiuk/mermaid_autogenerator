@@ -33,9 +33,18 @@ class cpp_graph:
 
     def loadMethod(self, method, is_public: bool = True):
         if is_public:
-            self.output += "\t\t+" + method["name"] + "\n"
+            self.output += "\t\t+" + method["name"]
         else:
-            self.output += "\t\t-" + method["name"] + "\n"
+            self.output += "\t\t-" + method["name"]
+        self.output += "("
+        for param in method["parameters"]:
+            self.output += param["name"] + ", "
+        self.output = self.output[0:-2]
+        self.output += ")"
+
+        if method["returns"].find("void") != -1:
+            self.output += ": " + method["returns"]
+        self.output += "\n"
 
     def loadProperty(self, property, is_public: bool = True):
         if is_public:
