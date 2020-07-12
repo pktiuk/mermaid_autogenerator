@@ -45,7 +45,7 @@ class cpp_graph:
 
         self.output += ")"
 
-        if method["returns"].find("void") != -1:
+        if method["returns"].find("void") == -1:
             self.output += ": " + method["returns"]
         self.output += "\n"
 
