@@ -39,7 +39,10 @@ class cpp_graph:
         self.output += "("
         for param in method["parameters"]:
             self.output += param["name"] + ", "
-        self.output = self.output[0:-2]
+        # remove excessive ", " if they were added
+        if len(method["parameters"]) != 0:
+            self.output = self.output[0:-2]
+
         self.output += ")"
 
         if method["returns"].find("void") != -1:
