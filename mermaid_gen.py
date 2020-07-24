@@ -67,12 +67,12 @@ if __name__ == "__main__":
     for header_file in sys.argv:
         print("Parsing file: " + header_file)
         try:
-            graph = cpp_graph(header_file)
+            parsedFile = cpp_graph(header_file)
         except CppHeaderParser.CppParseError as e:
             print(e)
             sys.exit(1)
 
-        graph.generateClassDiagram()
-        print(graph.output)
+        parsedFile.generateClassDiagram()
+        print(parsedFile.output)
 
     pass
