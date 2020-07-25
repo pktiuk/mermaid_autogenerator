@@ -8,10 +8,13 @@ import string
 
 class cpp_graph:
     def __init__(self, header_file):
+        # output string
         self.output = "classDiagram\n"
+        # pre-defined signs and symbols
         self.PRIVATE_SIGN = '-'
         self.PUBLIC_SIGN = '+'
 
+        # others
         self.cppHeader = CppHeaderParser.CppHeader(header_file)
         self.setOfMappedClasses = set()
 
