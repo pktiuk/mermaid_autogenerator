@@ -15,12 +15,12 @@ class cpp_graph:
         self.PUBLIC_SIGN = '+'
 
         # others
-        self.cppHeader = CppHeaderParser.CppHeader(header_file)
-        self.setOfMappedClasses = set()
+        self.cpp_header = CppHeaderParser.CppHeader(header_file)
+        self.set_of_mapped_classes = set()
 
     def generateClassDiagram(self):
-        for className, classFile in self.cppHeader.classes.items():
-            self.setOfMappedClasses.add(className)
+        for className, classFile in self.cpp_header.classes.items():
+            self.set_of_mapped_classes.add(className)
             self.output += "\tclass "+className+"{\n"
 
             for method in classFile["methods"]["public"]:
@@ -71,12 +71,12 @@ if __name__ == "__main__":
     for header_file in sys.argv:
         print("Parsing file: " + header_file)
         try:
-            parsedFile = cpp_graph(header_file)
+            parsed_file = cpp_graph(header_file)
         except CppHeaderParser.CppParseError as e:
             print(e)
             sys.exit(1)
 
-        parsedFile.generateClassDiagram()
-        print(parsedFile.output)
+        parsed_file.generateClassDiagram()
+        print(parsed_file.output)
 
     pass
