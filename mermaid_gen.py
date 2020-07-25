@@ -8,15 +8,16 @@ import string
 
 class cpp_graph:
     def __init__(self, header_file):
-        self.cppHeader = CppHeaderParser.CppHeader(header_file)
-
         self.output = "classDiagram\n"
         self.PRIVATE_SIGN = '-'
         self.PUBLIC_SIGN = '+'
 
+        self.cppHeader = CppHeaderParser.CppHeader(header_file)
+        self.setOfMappedClasses = set()
+
     def generateClassDiagram(self):
         for className, classFile in self.cppHeader.classes.items():
-            print(className)
+            self.setOfMappedClasses.add(className)
             self.output += "\tclass "+className+"{\n"
 
             for method in classFile["methods"]["public"]:
