@@ -6,7 +6,7 @@ import sys
 import string
 
 
-class cpp_graph:
+class CppGraph:
     def __init__(self, header_file):
         # output string
         self.output = "classDiagram\n"
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     for header_file in sys.argv:
         print("Parsing file: " + header_file)
         try:
-            parsed_file = cpp_graph(header_file)
+            parsed_file = CppGraph(header_file)
         except CppHeaderParser.CppParseError as e:
             print(e)
             sys.exit(1)
