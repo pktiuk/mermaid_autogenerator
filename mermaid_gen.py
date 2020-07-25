@@ -7,7 +7,7 @@ import string
 
 
 class CppGraph:
-    def __init__(self, header_file):
+    def __init__(self):
         # output string
         self.output = "classDiagram\n"
         # pre-defined signs and symbols
@@ -15,12 +15,14 @@ class CppGraph:
         self.PUBLIC_SIGN = '+'
 
         # others
+        self.all_of_classes = dict()
+
+    def loadFile(self, header_file: str):
         self.cpp_header = CppHeaderParser.CppHeader(header_file)
-        self.set_of_mapped_classes = set()
+        self.all_of_classes.update(self.cpp_header.classes)
 
     def generateClassDiagram(self):
-        for className, classFile in self.cpp_header.classes.items():
-            self.set_of_mapped_classes.add(className)
+        for className, classFile in self.all_of_classes.items():
             self.output += "\tclass "+className+"{\n"
 
             for method in classFile["methods"]["public"]:
@@ -67,16 +69,16 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     sys.argv.pop(0)  # remove script name
-
+    parsed_file = CppGraph()
     for header_file in sys.argv:
         print("Parsing file: " + header_file)
         try:
-            parsed_file = CppGraph(header_file)
+            parsed_file.loadFile(header_file)
         except CppHeaderParser.CppParseError as e:
             print(e)
             sys.exit(1)
 
-        parsed_file.generateClassDiagram()
-        print(parsed_file.output)
+    parsed_file.generateClassDiagram()
+    print(parsed_file.output)
 
     pass
