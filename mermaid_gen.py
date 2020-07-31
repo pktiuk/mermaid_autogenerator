@@ -9,7 +9,7 @@ import string
 class CppGraph:
     def __init__(self):
         # output string
-        self.class_hierarhy_str = str()
+        self.class_hierarchy_str = str()
         self.class_descriptions = str()
         # pre-defined signs and symbols
         self.PRIVATE_SIGN = '-'
@@ -66,7 +66,7 @@ class CppGraph:
             self.class_descriptions += "\t\t-" + property["name"] + "\n"
 
     def getOutput(self):
-        return "classDiagram\n"+self.class_hierarhy_str+self.class_descriptions
+        return "classDiagram\n"+self.class_hierarchy_str+self.class_descriptions
 
     pass
 
