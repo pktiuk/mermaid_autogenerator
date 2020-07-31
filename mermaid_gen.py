@@ -17,6 +17,7 @@ class CppGraph:
 
         # others
         self.all_of_classes = dict()
+        self.set_of_classnames = set()
 
     def loadFile(self, header_file: str):
         self.cpp_header = CppHeaderParser.CppHeader(header_file)
@@ -24,6 +25,8 @@ class CppGraph:
 
     def generateClassDiagram(self):
         for className, classFile in self.all_of_classes.items():
+            # only classes mentioned in files will be used for heneration of class hierarchy
+            self.set_of_classnames.add(className)
             self.class_descriptions += "\tclass "+className+"{\n"
 
             for method in classFile["methods"]["public"]:
